@@ -1,0 +1,902 @@
+{
+  "melhor_regressor": "MLP",
+  "melhor_classificador": "SVM (SVC)",
+  "base": {
+    "total": 1021,
+    "treino": 816,
+    "teste": 205
+  },
+  "features": [
+    "log_area",
+    "quartos",
+    "banheiros",
+    "tem_garagem",
+    "densidade_comodos",
+    "dist_centro_km",
+    "latitude",
+    "longitude",
+    "densidade_anuncios_km2",
+    "bairro_geo",
+    "area"
+  ],
+  "faixas_preco": {
+    "rotulos": [
+      "Baixa",
+      "Média",
+      "Alta"
+    ],
+    "cortes_treino": [
+      3800.0,
+      6932.999999999993
+    ],
+    "cortes_producao": [
+      3800.0,
+      6900.0
+    ]
+  },
+  "intervalo": {
+    "cobertura_alvo": 0.8,
+    "meia_largura_log": 0.4230104561731949,
+    "cobertura_no_teste": 0.8048780487804879
+  },
+  "importancia_features": {
+    "log_area": 0.22033686580489448,
+    "banheiros": 0.11850234100946513,
+    "densidade_comodos": 0.03089104104176569,
+    "latitude": 0.02472120480044169,
+    "quartos": 0.01638925857550684,
+    "longitude": 0.013888359248957543,
+    "tem_garagem": 0.005846335260530971,
+    "bairro_geo": 0.005107329548868403,
+    "dist_centro_km": 0.0005448988471685068,
+    "densidade_anuncios_km2": -0.00012275125070634885
+  },
+  "importancia_grupos": {
+    "Tamanho (área)": 0.22617114083252474,
+    "Cômodos (quartos, banheiros)": 0.2183148056098704,
+    "Localização (coordenadas, bairro, vizinhança)": 0.039804430272360164,
+    "Garagem": 0.0045772471929493965
+  },
+  "regressao": {
+    "Baseline (mediana)": {
+      "melhores_parametros": {},
+      "validacao_cv": {
+        "MAE": 3997.917889088534,
+        "RMSE": 6815.962165372405,
+        "MAPE": 0.5871259695944808,
+        "R2": -0.12407939076626784,
+        "R2_log": -0.017856431293199693
+      },
+      "teste": {
+        "MAE": 4309.082926829268,
+        "RMSE": 7465.7946428213845,
+        "MAPE": 0.5489643556713428,
+        "R2": -0.1497384660869625,
+        "R2_log": -0.0355310587895048
+      }
+    },
+    "Decision Tree": {
+      "melhores_parametros": {
+        "max_depth": 6,
+        "min_samples_leaf": 10
+      },
+      "validacao_cv": {
+        "MAE": 2368.9998708551757,
+        "RMSE": 4208.717171057102,
+        "MAPE": 0.32713561125306867,
+        "R2": 0.5714099080215079,
+        "R2_log": 0.6849716517923846
+      },
+      "teste": {
+        "MAE": 2712.6422109652226,
+        "RMSE": 4625.075322477392,
+        "MAPE": 0.3444074522645034,
+        "R2": 0.5587501186661763,
+        "R2_log": 0.6846653009138829
+      }
+    },
+    "MLP": {
+      "melhores_parametros": {
+        "alpha": 10.0,
+        "hidden_layer_sizes": [
+          32
+        ]
+      },
+      "validacao_cv": {
+        "MAE": 2147.836584935332,
+        "RMSE": 3833.766745336146,
+        "MAPE": 0.2752990380532941,
+        "R2": 0.644373582212429,
+        "R2_log": 0.7637638834957825
+      },
+      "teste": {
+        "MAE": 2256.5414847500383,
+        "RMSE": 3983.5783110234474,
+        "MAPE": 0.2576045585810163,
+        "R2": 0.6726640535310173,
+        "R2_log": 0.8004645785597776
+      }
+    },
+    "SVM (SVR)": {
+      "melhores_parametros": {
+        "C": 1,
+        "epsilon": 0.1,
+        "gamma": 0.02
+      },
+      "validacao_cv": {
+        "MAE": 2152.7344043784547,
+        "RMSE": 3875.6876710095667,
+        "MAPE": 0.2721861769657858,
+        "R2": 0.6365537550865883,
+        "R2_log": 0.7565664690626851
+      },
+      "teste": {
+        "MAE": 2193.902017717705,
+        "RMSE": 3967.606309230779,
+        "MAPE": 0.24803116183603163,
+        "R2": 0.6752836727596534,
+        "R2_log": 0.8008494655719991
+      }
+    }
+  },
+  "classificacao": {
+    "Decision Tree": {
+      "melhores_parametros": {
+        "max_depth": 8,
+        "min_samples_leaf": 5
+      },
+      "validacao_cv": {
+        "accuracy": 0.6801470588235294,
+        "f1_macro": 0.6841730013570887
+      },
+      "teste": {
+        "accuracy": 0.6829268292682927,
+        "f1_macro": 0.6880735451038332,
+        "matriz_confusao": [
+          [
+            44,
+            14,
+            4
+          ],
+          [
+            18,
+            47,
+            10
+          ],
+          [
+            0,
+            19,
+            49
+          ]
+        ]
+      }
+    },
+    "MLP": {
+      "melhores_parametros": {
+        "alpha": 10.0,
+        "hidden_layer_sizes": [
+          16
+        ]
+      },
+      "validacao_cv": {
+        "accuracy": 0.7205882352941176,
+        "f1_macro": 0.7244788904073401
+      },
+      "teste": {
+        "accuracy": 0.7268292682926829,
+        "f1_macro": 0.7274742593891531,
+        "matriz_confusao": [
+          [
+            46,
+            15,
+            1
+          ],
+          [
+            18,
+            44,
+            13
+          ],
+          [
+            0,
+            9,
+            59
+          ]
+        ]
+      }
+    },
+    "SVM (SVC)": {
+      "melhores_parametros": {
+        "C": 3,
+        "gamma": 0.02
+      },
+      "validacao_cv": {
+        "accuracy": 0.7316176470588235,
+        "f1_macro": 0.7361977797972749
+      },
+      "teste": {
+        "accuracy": 0.7463414634146341,
+        "f1_macro": 0.7480445627526372,
+        "matriz_confusao": [
+          [
+            46,
+            15,
+            1
+          ],
+          [
+            17,
+            48,
+            10
+          ],
+          [
+            0,
+            9,
+            59
+          ]
+        ]
+      }
+    }
+  },
+  "dbscan": {
+    "regiao": {
+      "escolhido": {
+        "eps": 0.8,
+        "min_samples": 8,
+        "silhouette": 0.3643706851335745,
+        "unidade_eps": "km"
+      },
+      "clusters": 17,
+      "ruido": 149,
+      "tamanhos": {
+        "0": 42,
+        "1": 130,
+        "2": 34,
+        "3": 92,
+        "4": 130,
+        "5": 171,
+        "6": 16,
+        "7": 26,
+        "8": 29,
+        "9": 17,
+        "10": 12,
+        "11": 66,
+        "12": 60,
+        "13": 11,
+        "14": 10,
+        "15": 20,
+        "16": 6
+      },
+      "tentativas": [
+        {
+          "eps": 0.4,
+          "min_samples": 6,
+          "clusters": 39,
+          "ruido": 0.623,
+          "maior_cluster": 0.07,
+          "silhouette": 0.6757748228773035
+        },
+        {
+          "eps": 0.6,
+          "min_samples": 6,
+          "clusters": 43,
+          "ruido": 0.261,
+          "maior_cluster": 0.105,
+          "silhouette": 0.397902192831214
+        },
+        {
+          "eps": 0.8,
+          "min_samples": 6,
+          "clusters": 14,
+          "ruido": 0.088,
+          "maior_cluster": 0.286,
+          "silhouette": 0.056381360112495685
+        },
+        {
+          "eps": 1.0,
+          "min_samples": 6,
+          "clusters": 4,
+          "ruido": 0.039,
+          "maior_cluster": 0.971,
+          "silhouette": -0.0920298150524631
+        },
+        {
+          "eps": 1.2,
+          "min_samples": 6,
+          "clusters": 4,
+          "ruido": 0.012,
+          "maior_cluster": 0.974,
+          "silhouette": 0.33900095440268657
+        },
+        {
+          "eps": 1.5,
+          "min_samples": 6,
+          "clusters": 3,
+          "ruido": 0.002,
+          "maior_cluster": 0.979,
+          "silhouette": 0.4008650860522944
+        },
+        {
+          "eps": 0.4,
+          "min_samples": 8,
+          "clusters": 21,
+          "ruido": 0.788,
+          "maior_cluster": 0.088,
+          "silhouette": 0.7400088954455684
+        },
+        {
+          "eps": 0.6,
+          "min_samples": 8,
+          "clusters": 30,
+          "ruido": 0.442,
+          "maior_cluster": 0.105,
+          "silhouette": 0.5249264663622741
+        },
+        {
+          "eps": 0.8,
+          "min_samples": 8,
+          "clusters": 17,
+          "ruido": 0.146,
+          "maior_cluster": 0.196,
+          "silhouette": 0.3643706851335745
+        },
+        {
+          "eps": 1.0,
+          "min_samples": 8,
+          "clusters": 3,
+          "ruido": 0.064,
+          "maior_cluster": 0.978,
+          "silhouette": 0.07983874558741841
+        },
+        {
+          "eps": 1.2,
+          "min_samples": 8,
+          "clusters": 3,
+          "ruido": 0.029,
+          "maior_cluster": 0.978,
+          "silhouette": 0.07346307490898718
+        },
+        {
+          "eps": 1.5,
+          "min_samples": 8,
+          "clusters": 3,
+          "ruido": 0.01,
+          "maior_cluster": 0.978,
+          "silhouette": 0.34029673233243307
+        },
+        {
+          "eps": 0.4,
+          "min_samples": 12,
+          "clusters": 3,
+          "ruido": 0.962,
+          "maior_cluster": 0.359,
+          "silhouette": 0.9469856032602757
+        },
+        {
+          "eps": 0.6,
+          "min_samples": 12,
+          "clusters": 16,
+          "ruido": 0.737,
+          "maior_cluster": 0.149,
+          "silhouette": 0.6507783373770484
+        },
+        {
+          "eps": 0.8,
+          "min_samples": 12,
+          "clusters": 21,
+          "ruido": 0.341,
+          "maior_cluster": 0.147,
+          "silhouette": 0.41689668318486944
+        },
+        {
+          "eps": 1.0,
+          "min_samples": 12,
+          "clusters": 11,
+          "ruido": 0.13,
+          "maior_cluster": 0.453,
+          "silhouette": 0.16442567920059228
+        },
+        {
+          "eps": 1.2,
+          "min_samples": 12,
+          "clusters": 3,
+          "ruido": 0.047,
+          "maior_cluster": 0.977,
+          "silhouette": 0.13414601068714685
+        },
+        {
+          "eps": 1.5,
+          "min_samples": 12,
+          "clusters": 2,
+          "ruido": 0.023,
+          "maior_cluster": 0.986,
+          "silhouette": 0.4159736100088305
+        }
+      ]
+    },
+    "perfil": {
+      "escolhido": {
+        "eps": 0.6,
+        "min_samples": 8,
+        "silhouette": 0.16299878266328816,
+        "unidade_eps": "desvios-padrão"
+      },
+      "clusters": 14,
+      "ruido": 299,
+      "tamanhos": {
+        "0": 176,
+        "1": 82,
+        "2": 65,
+        "3": 71,
+        "4": 132,
+        "5": 22,
+        "6": 27,
+        "7": 46,
+        "8": 27,
+        "9": 19,
+        "10": 26,
+        "11": 13,
+        "12": 9,
+        "13": 7
+      },
+      "tentativas": [
+        {
+          "eps": 0.3,
+          "min_samples": 5,
+          "clusters": 22,
+          "ruido": 0.467,
+          "maior_cluster": 0.265,
+          "silhouette": 0.20289305256592705
+        },
+        {
+          "eps": 0.4,
+          "min_samples": 5,
+          "clusters": 26,
+          "ruido": 0.343,
+          "maior_cluster": 0.247,
+          "silhouette": 0.15465664864740597
+        },
+        {
+          "eps": 0.5,
+          "min_samples": 5,
+          "clusters": 22,
+          "ruido": 0.26,
+          "maior_cluster": 0.229,
+          "silhouette": 0.11520081012364172
+        },
+        {
+          "eps": 0.6,
+          "min_samples": 5,
+          "clusters": 19,
+          "ruido": 0.222,
+          "maior_cluster": 0.223,
+          "silhouette": 0.10461962308850602
+        },
+        {
+          "eps": 0.8,
+          "min_samples": 5,
+          "clusters": 5,
+          "ruido": 0.087,
+          "maior_cluster": 0.583,
+          "silhouette": 0.10744183783572558
+        },
+        {
+          "eps": 1.0,
+          "min_samples": 5,
+          "clusters": 1,
+          "ruido": 0.046,
+          "maior_cluster": 1.0,
+          "silhouette": null
+        },
+        {
+          "eps": 0.3,
+          "min_samples": 8,
+          "clusters": 9,
+          "ruido": 0.633,
+          "maior_cluster": 0.365,
+          "silhouette": 0.2303396626765775
+        },
+        {
+          "eps": 0.4,
+          "min_samples": 8,
+          "clusters": 12,
+          "ruido": 0.463,
+          "maior_cluster": 0.279,
+          "silhouette": 0.21208876803490895
+        },
+        {
+          "eps": 0.5,
+          "min_samples": 8,
+          "clusters": 15,
+          "ruido": 0.367,
+          "maior_cluster": 0.262,
+          "silhouette": 0.16651027521140802
+        },
+        {
+          "eps": 0.6,
+          "min_samples": 8,
+          "clusters": 14,
+          "ruido": 0.293,
+          "maior_cluster": 0.244,
+          "silhouette": 0.16299878266328816
+        },
+        {
+          "eps": 0.8,
+          "min_samples": 8,
+          "clusters": 6,
+          "ruido": 0.107,
+          "maior_cluster": 0.583,
+          "silhouette": 0.09677990150792798
+        },
+        {
+          "eps": 1.0,
+          "min_samples": 8,
+          "clusters": 1,
+          "ruido": 0.057,
+          "maior_cluster": 1.0,
+          "silhouette": null
+        },
+        {
+          "eps": 0.3,
+          "min_samples": 12,
+          "clusters": 6,
+          "ruido": 0.733,
+          "maior_cluster": 0.476,
+          "silhouette": 0.2797436317684763
+        },
+        {
+          "eps": 0.4,
+          "min_samples": 12,
+          "clusters": 6,
+          "ruido": 0.584,
+          "maior_cluster": 0.344,
+          "silhouette": 0.23266813737580183
+        },
+        {
+          "eps": 0.5,
+          "min_samples": 12,
+          "clusters": 7,
+          "ruido": 0.486,
+          "maior_cluster": 0.309,
+          "silhouette": 0.189649072897987
+        },
+        {
+          "eps": 0.6,
+          "min_samples": 12,
+          "clusters": 10,
+          "ruido": 0.398,
+          "maior_cluster": 0.272,
+          "silhouette": 0.17282134077634315
+        },
+        {
+          "eps": 0.8,
+          "min_samples": 12,
+          "clusters": 5,
+          "ruido": 0.133,
+          "maior_cluster": 0.599,
+          "silhouette": 0.10642473433020665
+        },
+        {
+          "eps": 1.0,
+          "min_samples": 12,
+          "clusters": 1,
+          "ruido": 0.064,
+          "maior_cluster": 1.0,
+          "silhouette": null
+        }
+      ]
+    }
+  },
+  "perfis_cluster_regiao": [
+    {
+      "cluster_regiao": 0,
+      "anuncios": 42,
+      "aluguel_mediano": 5100.0,
+      "preco_m2_mediano": 29.4,
+      "area_mediana": 184.5,
+      "quartos_medianos": 3.0,
+      "dist_centro_km": 5.0,
+      "bairro_dominante": "Boa Vista"
+    },
+    {
+      "cluster_regiao": 1,
+      "anuncios": 130,
+      "aluguel_mediano": 6500.0,
+      "preco_m2_mediano": 33.1,
+      "area_mediana": 200.0,
+      "quartos_medianos": 3.0,
+      "dist_centro_km": 6.0,
+      "bairro_dominante": "Campo Comprido"
+    },
+    {
+      "cluster_regiao": 2,
+      "anuncios": 34,
+      "aluguel_mediano": 4450.0,
+      "preco_m2_mediano": 28.7,
+      "area_mediana": 155.0,
+      "quartos_medianos": 3.0,
+      "dist_centro_km": 7.9,
+      "bairro_dominante": "Atuba"
+    },
+    {
+      "cluster_regiao": 3,
+      "anuncios": 92,
+      "aluguel_mediano": 4100.0,
+      "preco_m2_mediano": 31.7,
+      "area_mediana": 143.0,
+      "quartos_medianos": 3.0,
+      "dist_centro_km": 6.2,
+      "bairro_dominante": "Uberaba"
+    },
+    {
+      "cluster_regiao": 4,
+      "anuncios": 130,
+      "aluguel_mediano": 5875.0,
+      "preco_m2_mediano": 33.5,
+      "area_mediana": 180.0,
+      "quartos_medianos": 3.0,
+      "dist_centro_km": 7.4,
+      "bairro_dominante": "Santa Felicidade"
+    },
+    {
+      "cluster_regiao": 5,
+      "anuncios": 171,
+      "aluguel_mediano": 6800.0,
+      "preco_m2_mediano": 32.8,
+      "area_mediana": 210.0,
+      "quartos_medianos": 3.0,
+      "dist_centro_km": 2.9,
+      "bairro_dominante": "Vista Alegre"
+    },
+    {
+      "cluster_regiao": 6,
+      "anuncios": 16,
+      "aluguel_mediano": 4825.0,
+      "preco_m2_mediano": 36.1,
+      "area_mediana": 133.0,
+      "quartos_medianos": 3.0,
+      "dist_centro_km": 10.3,
+      "bairro_dominante": "Alto Boqueirão"
+    },
+    {
+      "cluster_regiao": 7,
+      "anuncios": 26,
+      "aluguel_mediano": 4000.0,
+      "preco_m2_mediano": 29.0,
+      "area_mediana": 154.0,
+      "quartos_medianos": 3.0,
+      "dist_centro_km": 6.7,
+      "bairro_dominante": "Barreirinha"
+    },
+    {
+      "cluster_regiao": 8,
+      "anuncios": 29,
+      "aluguel_mediano": 3200.0,
+      "preco_m2_mediano": 26.8,
+      "area_mediana": 116.0,
+      "quartos_medianos": 3.0,
+      "dist_centro_km": 7.0,
+      "bairro_dominante": "Bairro Alto"
+    },
+    {
+      "cluster_regiao": 9,
+      "anuncios": 17,
+      "aluguel_mediano": 3898.0,
+      "preco_m2_mediano": 33.2,
+      "area_mediana": 135.3,
+      "quartos_medianos": 3.0,
+      "dist_centro_km": 9.0,
+      "bairro_dominante": "Uberaba"
+    },
+    {
+      "cluster_regiao": 10,
+      "anuncios": 12,
+      "aluguel_mediano": 3750.0,
+      "preco_m2_mediano": 29.6,
+      "area_mediana": 164.0,
+      "quartos_medianos": 3.0,
+      "dist_centro_km": 10.0,
+      "bairro_dominante": "Capão Raso"
+    },
+    {
+      "cluster_regiao": 11,
+      "anuncios": 66,
+      "aluguel_mediano": 8445.0,
+      "preco_m2_mediano": 32.0,
+      "area_mediana": 270.0,
+      "quartos_medianos": 4.0,
+      "dist_centro_km": 4.0,
+      "bairro_dominante": "Jardim Social"
+    },
+    {
+      "cluster_regiao": 12,
+      "anuncios": 60,
+      "aluguel_mediano": 4175.0,
+      "preco_m2_mediano": 29.3,
+      "area_mediana": 150.5,
+      "quartos_medianos": 3.0,
+      "dist_centro_km": 7.8,
+      "bairro_dominante": "Xaxim"
+    },
+    {
+      "cluster_regiao": 13,
+      "anuncios": 11,
+      "aluguel_mediano": 11000.0,
+      "preco_m2_mediano": 26.1,
+      "area_mediana": 359.0,
+      "quartos_medianos": 3.0,
+      "dist_centro_km": 2.6,
+      "bairro_dominante": "Jardim Botânico"
+    },
+    {
+      "cluster_regiao": 14,
+      "anuncios": 10,
+      "aluguel_mediano": 2985.0,
+      "preco_m2_mediano": 22.1,
+      "area_mediana": 188.0,
+      "quartos_medianos": 3.0,
+      "dist_centro_km": 15.9,
+      "bairro_dominante": "Tatuquara"
+    },
+    {
+      "cluster_regiao": 15,
+      "anuncios": 20,
+      "aluguel_mediano": 3150.0,
+      "preco_m2_mediano": 35.0,
+      "area_mediana": 93.5,
+      "quartos_medianos": 3.0,
+      "dist_centro_km": 10.1,
+      "bairro_dominante": "Pinheirinho"
+    },
+    {
+      "cluster_regiao": 16,
+      "anuncios": 6,
+      "aluguel_mediano": 3100.0,
+      "preco_m2_mediano": 39.0,
+      "area_mediana": 81.5,
+      "quartos_medianos": 2.0,
+      "dist_centro_km": 12.1,
+      "bairro_dominante": "Alto Boqueirão"
+    }
+  ],
+  "perfis_cluster_perfil": [
+    {
+      "cluster_perfil": 0,
+      "anuncios": 176,
+      "aluguel_mediano": 4500.0,
+      "preco_m2_mediano": 30.0,
+      "area_mediana": 155.0,
+      "quartos_medianos": 3.0,
+      "dist_centro_km": 6.6,
+      "bairro_dominante": "Uberaba"
+    },
+    {
+      "cluster_perfil": 1,
+      "anuncios": 82,
+      "aluguel_mediano": 2800.0,
+      "preco_m2_mediano": 27.5,
+      "area_mediana": 106.5,
+      "quartos_medianos": 3.0,
+      "dist_centro_km": 7.1,
+      "bairro_dominante": "Boqueirão"
+    },
+    {
+      "cluster_perfil": 2,
+      "anuncios": 65,
+      "aluguel_mediano": 2200.0,
+      "preco_m2_mediano": 32.5,
+      "area_mediana": 65.0,
+      "quartos_medianos": 2.0,
+      "dist_centro_km": 7.5,
+      "bairro_dominante": "Bairro Alto"
+    },
+    {
+      "cluster_perfil": 3,
+      "anuncios": 71,
+      "aluguel_mediano": 6300.0,
+      "preco_m2_mediano": 33.1,
+      "area_mediana": 178.0,
+      "quartos_medianos": 3.0,
+      "dist_centro_km": 6.9,
+      "bairro_dominante": "Santa Felicidade"
+    },
+    {
+      "cluster_perfil": 4,
+      "anuncios": 132,
+      "aluguel_mediano": 4000.0,
+      "preco_m2_mediano": 31.9,
+      "area_mediana": 136.0,
+      "quartos_medianos": 3.0,
+      "dist_centro_km": 7.3,
+      "bairro_dominante": "Santa Felicidade"
+    },
+    {
+      "cluster_perfil": 5,
+      "anuncios": 22,
+      "aluguel_mediano": 9400.0,
+      "preco_m2_mediano": 28.7,
+      "area_mediana": 322.9,
+      "quartos_medianos": 4.0,
+      "dist_centro_km": 5.0,
+      "bairro_dominante": "Jardim Social"
+    },
+    {
+      "cluster_perfil": 6,
+      "anuncios": 27,
+      "aluguel_mediano": 11000.0,
+      "preco_m2_mediano": 41.5,
+      "area_mediana": 250.0,
+      "quartos_medianos": 3.0,
+      "dist_centro_km": 6.1,
+      "bairro_dominante": "Santa Felicidade"
+    },
+    {
+      "cluster_perfil": 7,
+      "anuncios": 46,
+      "aluguel_mediano": 6900.0,
+      "preco_m2_mediano": 27.9,
+      "area_mediana": 240.0,
+      "quartos_medianos": 4.0,
+      "dist_centro_km": 5.9,
+      "bairro_dominante": "Bacacheri"
+    },
+    {
+      "cluster_perfil": 8,
+      "anuncios": 27,
+      "aluguel_mediano": 5000.0,
+      "preco_m2_mediano": 25.8,
+      "area_mediana": 212.0,
+      "quartos_medianos": 4.0,
+      "dist_centro_km": 5.4,
+      "bairro_dominante": "Boa Vista"
+    },
+    {
+      "cluster_perfil": 9,
+      "anuncios": 19,
+      "aluguel_mediano": 3800.0,
+      "preco_m2_mediano": 25.8,
+      "area_mediana": 132.5,
+      "quartos_medianos": 2.0,
+      "dist_centro_km": 7.0,
+      "bairro_dominante": "Santa Felicidade"
+    },
+    {
+      "cluster_perfil": 10,
+      "anuncios": 26,
+      "aluguel_mediano": 1525.0,
+      "preco_m2_mediano": 44.1,
+      "area_mediana": 36.0,
+      "quartos_medianos": 1.0,
+      "dist_centro_km": 6.6,
+      "bairro_dominante": "Cajuru"
+    },
+    {
+      "cluster_perfil": 11,
+      "anuncios": 13,
+      "aluguel_mediano": 27000.0,
+      "preco_m2_mediano": 58.0,
+      "area_mediana": 497.0,
+      "quartos_medianos": 4.0,
+      "dist_centro_km": 6.0,
+      "bairro_dominante": "Campo Comprido"
+    },
+    {
+      "cluster_perfil": 12,
+      "anuncios": 9,
+      "aluguel_mediano": 14100.0,
+      "preco_m2_mediano": 38.0,
+      "area_mediana": 372.0,
+      "quartos_medianos": 5.0,
+      "dist_centro_km": 4.6,
+      "bairro_dominante": "Campo Comprido"
+    },
+    {
+      "cluster_perfil": 13,
+      "anuncios": 7,
+      "aluguel_mediano": 14500.0,
+      "preco_m2_mediano": 55.0,
+      "area_mediana": 270.0,
+      "quartos_medianos": 4.0,
+      "dist_centro_km": 3.3,
+      "bairro_dominante": "Mercês"
+    }
+  ]
+}

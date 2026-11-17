@@ -1,0 +1,9 @@
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# documentos de explicação (ficam só locais)
+APRESENTACAO.md
+README.md
+scraper/README.md

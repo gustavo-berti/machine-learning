@@ -1,0 +1,86 @@
+{
+  "output": "../data/imoveis_curitiba.csv",
+  "history_dir": "../data/historico",
+  "request": {
+    "delay_seconds": 1.5,
+    "timeout_seconds": 30,
+    "max_retries": 3,
+    "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+  },
+  "sites": [
+    {
+      "name": "chavesnamao",
+      "enabled": true,
+      "base_url": "https://www.chavesnamao.com.br",
+      "locations": [
+        "casas-para-alugar/pr-curitiba"
+      ],
+      "page_param": "pg",
+      "pages": 56,
+      "collector": "chavesnamao"
+    },
+    {
+      "name": "baggio",
+      "enabled": true,
+      "collector": "baggio",
+      "base_url": "https://baggioimoveis.com.br",
+      "api_filters": {
+        "interesse": 696,
+        "imovel_tipo": "774,769,770,2095"
+      },
+      "city": "Curitiba"
+    },
+    {
+      "name": "quintoandar",
+      "enabled": true,
+      "base_url": "https://www.quintoandar.com.br/alugar/imovel",
+      "locations": [
+        "curitiba-pr-brasil",
+        "agua-verde-curitiba-pr-brasil",
+        "alto-da-gloria-curitiba-pr-brasil",
+        "alto-da-xv-curitiba-pr-brasil",
+        "bacacheri-curitiba-pr-brasil",
+        "bairro-alto-curitiba-pr-brasil",
+        "batel-curitiba-pr-brasil",
+        "bigorrilho-curitiba-pr-brasil",
+        "campina-do-siqueira-curitiba-pr-brasil",
+        "campo-comprido-curitiba-pr-brasil",
+        "capao-raso-curitiba-pr-brasil",
+        "centro-civico-curitiba-pr-brasil",
+        "centro-curitiba-pr-brasil",
+        "cidade-industrial-de-curitiba-curitiba-pr-brasil",
+        "cristo-rei-curitiba-pr-brasil",
+        "guaira-curitiba-pr-brasil",
+        "jardim-botanico-curitiba-pr-brasil",
+        "juveve-curitiba-pr-brasil",
+        "matriz-curitiba-pr-brasil",
+        "merces-curitiba-pr-brasil",
+        "novo-mundo-curitiba-pr-brasil",
+        "parolin-curitiba-pr-brasil",
+        "portao-curitiba-pr-brasil",
+        "prado-velho-curitiba-pr-brasil",
+        "reboucas-curitiba-pr-brasil",
+        "santa-candida-curitiba-pr-brasil",
+        "santa-quiteria-curitiba-pr-brasil",
+        "sao-francisco-curitiba-pr-brasil",
+        "seminario-curitiba-pr-brasil",
+        "vila-izabel-curitiba-pr-brasil",
+        "xaxim-curitiba-pr-brasil"
+      ],
+      "filters": [
+        "casa"
+      ],
+      "collector": "quintoandar"
+    },
+    {
+      "_nota": "A OLX está atrás do Cloudflare Bot Management em todos os hosts (www, apigw, /api/v1/main-search) e responde 403 a qualquer cliente que não seja um navegador real -- inclusive em /robots.txt, ou seja, o próprio arquivo que declara o que robôs podem acessar é negado. Passar disso exigiria falsificar impressão digital TLS, navegador headless com stealth ou resolução de CAPTCHA, ou seja, burlar um controle anti-robô deliberado. Fica desabilitada por escolha, não por falta de parser.",
+      "name": "olx",
+      "enabled": false,
+      "base_url": "https://www.olx.com.br/imoveis/aluguel/casas",
+      "locations": [
+        "estado-pr/parana/curitiba-e-regiao/curitiba"
+      ],
+      "collector": "olx"
+    }
+  ]
+}

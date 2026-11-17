@@ -1,0 +1,16 @@
+pandas>=3.0
+numpy>=2.5
+requests>=2.34
+scikit-learn>=1.9
+geopandas>=1.2
+shapely>=2.1
+folium>=0.20
+streamlit>=1.65
+streamlit-folium>=0.27
+altair>=6.0
+matplotlib>=3.11
+joblib>=1.6
+tabulate>=0.10
+pytest>=9.0
+starlette>=1.7
+uvicorn>=0.54

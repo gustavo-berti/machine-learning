@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aluguel Curitiba</title>
+  <meta name="description" content="Descubra quanto custa alugar uma casa em qualquer ponto de Curitiba.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-icon" aria-hidden="true">🏠</span>
+      <div>
+        <strong>Aluguel Curitiba</strong>
+        <small id="brand-sub">carregando…</small>
+      </div>
+    </div>
+    <nav class="modes" role="tablist" aria-label="Modo">
+      <button role="tab" class="mode active" data-mode="sim" aria-selected="true">💰 Quanto custa?</button>
+      <button role="tab" class="mode" data-mode="explore" aria-selected="false">🗺️ Explorar o mercado</button>
+    </nav>
+    <button class="ghost" id="about-btn" aria-haspopup="dialog">ⓘ <span class="hide-sm">Sobre os dados</span></button>
+  </header>
+
+  <main class="layout">
+    <section class="map-wrap">
+      <div id="map" aria-label="Mapa de Curitiba"></div>
+      <div class="map-hint" id="map-hint">👆 Clique no mapa onde fica a casa</div>
+      <div class="legend" id="legend" hidden></div>
+    </section>
+
+    <!-- =================== SIMULADOR =================== -->
+    <aside class="panel" id="panel-sim">
+      <div class="step">
+        <h2><span class="num">1</span> Onde fica a casa?</h2>
+        <div class="search">
+          <input id="search" type="search" autocomplete="off" placeholder="Digite um endereço ou bairro…" aria-label="Buscar endereço ou bairro">
+          <ul id="search-results" class="search-results" role="listbox" hidden></ul>
+        </div>
+        <p class="muted small" id="place">…ou clique direto no mapa.</p>
+      </div>
+
+      <div class="step">
+        <h2><span class="num">2</span> Como é a casa?</h2>
+        <div class="field">
+          <label for="area">Área construída</label>
+          <div class="area-row">
+            <input id="area-range" type="range" min="30" max="600" step="5" value="150" aria-label="Área em metros quadrados">
+            <div class="unit-input"><input id="area" type="number" min="20" max="2000" step="5" value="150"><span>m²</span></div>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Quartos</label>
+            <div class="stepper" data-key="quartos" data-min="1" data-max="10">
+              <button type="button" data-d="-1" aria-label="Menos quartos">−</button><output>3</output><button type="button" data-d="1" aria-label="Mais quartos">+</button>
+            </div>
+          </div>
+          <div class="field">
+            <label>Banheiros</label>
+            <div class="stepper" data-key="banheiros" data-min="1" data-max="10">
+              <button type="button" data-d="-1" aria-label="Menos banheiros">−</button><output>2</output><button type="button" data-d="1" aria-label="Mais banheiros">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Garagem</label>
+          <div class="segmented" id="garagem" role="radiogroup" aria-label="Garagem">
+            <button type="button" data-v="1" class="on" role="radio" aria-checked="true">Tem garagem</button>
+            <button type="button" data-v="0" role="radio" aria-checked="false">Sem garagem</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="step result" id="result" aria-live="polite">
+        <div class="empty" id="result-empty">
+          <div class="empty-icon">📍</div>
+          <p><strong>Escolha um local</strong><br>Clique no mapa ou busque um endereço para ver o aluguel estimado.</p>
+        </div>
+        <div id="result-body" hidden>
+          <p class="eyebrow" id="r-where"></p>
+          <div class="big"><span id="r-value">—</span><small>/mês</small></div>
+          <p class="range-text">Provavelmente entre <strong id="r-low"></strong> e <strong id="r-high"></strong></p>
+          <div class="range-bar" aria-hidden="true"><div class="range-fill"></div><div class="range-dot" id="r-dot"></div></div>
+          <div class="chips">
+            <span class="chip" id="r-band"></span>
+            <span class="chip" id="r-conf"></span>
+          </div>
+          <ul class="warnings" id="r-warnings"></ul>
+
+          <details class="block" id="compare-block">
+            <summary>🏷️ Viu um anúncio? Compare o preço</summary>
+            <div class="unit-input wide"><span>R$</span><input id="announced" type="number" min="0" step="100" placeholder="ex.: 4500"><span>/mês</span></div>
+            <p id="verdict" class="verdict" hidden></p>
+          </details>
+
+          <div class="block">
+            <h3>O que muda o preço desta casa</h3>
+            <div id="r-factors" class="factors"></div>
+            <p class="muted small">Cada linha muda uma coisa e mantém o resto. É o que o modelo aprendeu, não uma regra.</p>
+          </div>
+
+          <div class="block">
+            <h3>Casas parecidas anunciadas</h3>
+            <div id="r-similar" class="cards"></div>
+          </div>
+
+          <div class="actions">
+            <button class="ghost" id="share-btn">🔗 Copiar link</button>
+            <button class="ghost" id="report-btn">⬇️ Baixar resumo</button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- =================== EXPLORAR =================== -->
+    <aside class="panel" id="panel-explore" hidden>
+      <div class="kpis">
+        <div><small>Anúncios</small><strong id="k-count">—</strong></div>
+        <div><small>Aluguel mediano</small><strong id="k-rent">—</strong></div>
+        <div><small>Preço por m²</small><strong id="k-m2">—</strong></div>
+      </div>
+
+      <div class="step">
+        <h2>Colorir os bairros por</h2>
+        <div class="segmented" id="metric">
+          <button type="button" data-v="aluguel" class="on">Aluguel</button>
+          <button type="button" data-v="m2">R$ por m²</button>
+          <button type="button" data-v="count">Nº de anúncios</button>
+        </div>
+        <label class="switch"><input type="checkbox" id="show-points"> Mostrar cada anúncio no mapa</label>
+      </div>
+
+      <div class="step">
+        <h2>Filtrar anúncios <button class="link" id="clear-filters">limpar</button></h2>
+        <div class="field">
+          <label>Aluguel por mês</label>
+          <div class="field-row">
+            <div class="unit-input"><span>de R$</span><input id="f-min" type="number" min="0" step="500" placeholder="0"></div>
+            <div class="unit-input"><span>até R$</span><input id="f-max" type="number" min="0" step="500" placeholder="sem limite"></div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Quartos</label>
+          <div class="pills" id="f-rooms">
+            <button type="button" data-v="1">1</button><button type="button" data-v="2">2</button><button type="button" data-v="3">3</button><button type="button" data-v="4">4+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="step" id="bairro-detail" hidden></div>
+
+      <div class="step">
+        <h2>Bairros <small class="muted" id="rank-label">mais caros primeiro</small></h2>
+        <input id="rank-filter" type="search" placeholder="Filtrar bairros…" aria-label="Filtrar lista de bairros">
+        <ol class="rank" id="rank"></ol>
+        <button class="ghost full" id="csv-btn">⬇️ Baixar anúncios filtrados (CSV)</button>
+      </div>
+    </aside>
+  </main>
+
+  <dialog id="about">
+    <form method="dialog"><button class="close" aria-label="Fechar">✕</button></form>
+    <div id="about-body"></div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" hidden></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>
